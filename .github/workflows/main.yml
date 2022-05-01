@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3.1.1
         with:
-          node-version: 16.x    
+          node-version: 16.X
 
       - name: Install Project Dependencies
         run: npm ci
@@ -29,3 +29,13 @@ jobs:
 
       - name: Verify build
         run: ls -la public
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          sudo chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.REMOTE_HOST }}" > ~/.ssh/known_hosts
+
+      - name: Verify key
+        run: cat ~/.ssh/deploy_key
