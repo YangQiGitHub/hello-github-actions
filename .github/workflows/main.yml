@@ -37,5 +37,5 @@ jobs:
           sudo chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.REMOTE_HOST }}" > ~/.ssh/known_hosts
 
-      - name: Verify key
-        run: cat ~/.ssh/deploy_key
+      - name: SFTP upload
+        run: sftp -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.REMOTE_HOST }} <<< $'cd ${{ secrets.DESTINATION_PATH }} \n put -r public/*'
