@@ -41,13 +41,13 @@ jobs:
         # run: sftp -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.REMOTE_HOST }} <<< $'cd ${{ secrets.DESTINATION_PATH }} \n put -r public/*'
       
       - name: SCP Files
-        uses: appleboy/scp-action@v0.0.1
+        uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: "${{ secrets.REMOTE_HOST }}"
+          username: "${{ secrets.DEPLOY_USER }}"
+          key: "${{ secrets.SSH_PRIVATE_KEY }}"
           source: "public/*"
-          target: ${{ secrets.DESTINATION_PATH }}
+          target: "${{ secrets.DESTINATION_PATH }}"
 
       # - name: SFTP Deploy
       #   uses: wlixcc/SFTP-Deploy-Action@v1.2.2
