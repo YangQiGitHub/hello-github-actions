@@ -42,6 +42,7 @@ jobs:
       
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.2
+        with:
           username: "${{ secrets.DEPLOY_USER }}"
           server: "${{ secrets.REMOTE_HOST }}"
           ssh_private_key: "${{ secrets.SSH_PRIVATE_KEY }}"
